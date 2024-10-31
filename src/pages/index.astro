@@ -1,7 +1,20 @@
 ---
+import WelcomeWindow from "../components/WelcomeWindow.astro";
 import SiteLayout from "../layout/SiteLayout.astro";
+import PortfolioWindow from "../components/PortfolioWindow.astro";
+import ExperienceWindow from "../components/ExperienceWindow.astro";
 ---
 
 <SiteLayout>
-    <p>This is the home page</p>
+  <section class="flex flex-col md:flex-row">
+    <section class="md:w-[50%] w-full">
+      <section class="flex flex-col">
+        <WelcomeWindow />
+        <ExperienceWindow />
+      </section>
+    </section>
+    <section class="md:w-[50%] w-full md:min-h-[700px] h-[500px]">
+      <PortfolioWindow />
+    </section>
+  </section>
 </SiteLayout>
