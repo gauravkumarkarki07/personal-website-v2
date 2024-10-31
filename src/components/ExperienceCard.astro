@@ -1,0 +1,22 @@
+---
+const { experience } = Astro.props;
+---
+
+<section class="flex flex-col">
+  <span>{experience.company}</span>
+  <ol class="text-sm">
+    <li class="italic">{experience.role}</li>
+    <li class="flex flex-row gap-8">
+      <span>{experience.dateJoined}</span>
+      <span>-</span>
+      {
+        experience.isCurrent && !experience.dateLeft ? (
+          <span>Current</span>
+        ) : (
+          <span>{experience.dateLeft}</span>
+        )
+      }
+    </li>
+    <li>{experience.location}</li>
+  </ol>
+</section>

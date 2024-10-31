@@ -9,6 +9,7 @@ export default {
       colors: {
         background: "#2D2D2D",
         backgroundOutline: "#5F5F5F",
+        textgreen: "#00FF00",
       },
     },
   },

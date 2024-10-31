@@ -1,5 +1,64 @@
+---
+import ExperienceCard from "./ExperienceCard.astro";
+
+const skills = ["nodejs", "react", "C#", "Asp.Net"];
+
+const experiences = [
+  {
+    id: 1,
+    company: "Outback Yak",
+    role: "Associate Software Engineer",
+    location: "Melbourne, Australia",
+    dateJoined: "July, 2024",
+    dateLeft: null,
+    isCurrent: true,
+  },
+  {
+    id: 2,
+    company: "Learn Tech Pvt Ltd",
+    role: "Full Stack Web Developer",
+    location: "Kathmandu, Nepal",
+    dateJoined: "March, 2022",
+    dateLeft: "Feburary 2023",
+    isCurrent: false,
+  },
+  {
+    id: 3,
+    company: "Search Technology",
+    role: "Junior Web Developer",
+    location: "Kathmandu, Nepal",
+    dateJoined: "March, 2022",
+    dateLeft: "Feburary 2023",
+    isCurrent: false,
+  },
+];
+---
+
 <section
-  class="text-white bg-background p-4 min-h-[350px] border-backgroundOutline border-x-2 border-b-2"
+  class="text-white bg-background p-4 h-[450px] border-backgroundOutline border-x-2 border-b-2 flex flex-col gap-6 overflow-y-auto"
 >
-  This is the experience window
+  <article>
+    <h1 class="text-textgreen"># My Expertises and Experience</h1>
+    <span class="text-backgroundOutline"
+      >==================================</span
+    >
+  </article>
+  <article class="flex flex-col gap-2">
+    <span>Technical Expertise:</span>
+    <section class="flex flex-row gap-2 flex-wrap">
+      {skills.map((skill) => <span class="border p-1">{skill}</span>)}
+    </section>
+  </article>
+  <article class="flex flex-col">
+    <span>Professional Experience:</span>
+    <ul class="flex flex-col gap-6">
+      {
+        experiences.map((experience) => (
+          <li>
+            <ExperienceCard experience={experience} />
+          </li>
+        ))
+      }
+    </ul>
+  </article>
 </section>
