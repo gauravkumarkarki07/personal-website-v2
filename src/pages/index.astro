@@ -1,9 +1,16 @@
 ---
 import Layout from "../layout/layout.astro";
+import CommandLineInput from "../components/CommandLineInput.astro";
+import HelpCommandList from "../components/HelpCommandList.astro";
+import WelcomeComponent from "../components/WelcomeComponent.astro";
 ---
 
 <Layout>
-	<section> 
-		This is the terminal page
-	</section>
+  <section
+    class="mx-4 my-4 h-[calc(100vh-2rem)] border-2 border-primaryborderColor/30 rounded-lg p-4 overflow-y-auto"
+  >
+    <!-- <HelpCommandList/> -->
+     <WelcomeComponent/>
+    <CommandLineInput/>
+  </section>
 </Layout>
