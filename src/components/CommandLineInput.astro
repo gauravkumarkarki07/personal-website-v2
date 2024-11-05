@@ -1,10 +1,44 @@
-<section class="flex flex-row gap-2">
+---
+
+---
+
+<form class="flex flex-row gap-2" id="commandForm">
   <span class="text-primaryText flex flex-row gap-0">
     guest@guest:
     <span class="text-secondaryText">~</span>
     <span class="text-white">$</span>
   </span>
-  <input 
+  <input
     class="w-full focus:outline-none bg-background"
+    id="commandInput"
+    autocomplete="off"
+    type="text"
+    maxlength="20"
+    minlength="2"
   />
-</section>
+</form>
+
+<script>
+  import { contentArray } from "../stores/globalStore.ts";
+
+  const availableCommands = ["help", "ls", "cat", "exit", "clear"];
+
+  const form = document.getElementById("commandForm");
+  const input = document.querySelector("input");
+
+  input?.addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+      event.preventDefault();
+
+      const command = input.value?.trim().toLocaleLowerCase();
+
+      if (availableCommands.includes(command)) {
+        contentArray.set([...contentArray.get(),command]);
+      } else {
+        alert(`Invalid command: "${command}"`);
+      }
+
+      input.value = "";
+    }
+  });
+</script>

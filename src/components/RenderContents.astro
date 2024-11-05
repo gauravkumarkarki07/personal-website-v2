@@ -1,0 +1,15 @@
+---
+import HelpCommandList from "./HelpCommandList.astro";
+import WelcomeComponent from "./WelcomeComponent.astro";
+---
+
+<section>
+    
+</section>
+
+<script>
+  import { contentArray } from "../stores/globalStore";
+  contentArray.subscribe((data) => {
+    console.log(data);
+  });
+</script>
