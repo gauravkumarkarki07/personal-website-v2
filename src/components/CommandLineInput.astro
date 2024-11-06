@@ -32,12 +32,11 @@
 
       const command = input.value?.trim().toLocaleLowerCase();
 
-      if (availableCommands.includes(command)) {
-        contentArray.set([...contentArray.get(),command]);
+      if (command) {
+        contentArray.set([...contentArray.get(), command]);
       } else {
-        alert(`Invalid command: "${command}"`);
+        contentArray.set([...contentArray.get(), 'empty']);
       }
-
       input.value = "";
     }
   });

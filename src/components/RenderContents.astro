@@ -3,13 +3,102 @@ import HelpCommandList from "./HelpCommandList.astro";
 import WelcomeComponent from "./WelcomeComponent.astro";
 ---
 
-<section>
-    
-</section>
+<section id="main"></section>
 
 <script>
   import { contentArray } from "../stores/globalStore";
-  contentArray.subscribe((data) => {
-    console.log(data);
-  });
+  import { commandList } from "../components/HelpCommandList.astro";
+
+  window.onload = function () {
+    const main = document.getElementById("main") as HTMLElement;
+    RenderWelcomeComponent(main);
+    contentArray.subscribe((command) => {
+      if (command && command.length > 0) {
+        // Clearing main because, if there are two help command in the list, it render two time with single help command;
+        main.innerHTML = "";
+        command.forEach((content) => {
+          switch (content) {
+            case "help":
+              RenderHelpCommandList(main);
+              break;
+            case "clear":
+              ClearContent(main);
+              break;
+            default:
+              RenderInvalid(main, content);
+          }
+        });
+      }
+      console.log(command);
+    });
+  };
+
+  function RenderHelpCommandList(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute(
+      "class",
+      "flex flex-col gap-4 py-4 px-2 my-6 w-fit border border-gray-500"
+    );
+    const article = document.createElement("article");
+    article.setAttribute("class", "flex flex-col gap-2");
+    section.append(article);
+    const h1 = document.createElement("h1");
+    h1.setAttribute("class", "text-xl");
+    h1.textContent = "Available Commands:";
+    const span = document.createElement("span");
+    span.setAttribute("class", "text-sm text-gray-400");
+    span.textContent = "All commands are case insentive";
+    article.append(h1);
+    article.append(span);
+    main.append(section);
+
+    const ul = document.createElement("ul");
+    ul.setAttribute("class", "flex flex-col gap-1");
+
+    commandList.forEach((command) => {
+      const li = document.createElement("li");
+      li.setAttribute("class", "text-secondaryText");
+
+      const span = document.createElement("span");
+
+      span.innerHTML = `${command.commandName} <span class="text-white"> => ${command.description}</span>`;
+
+      li.appendChild(span);
+      ul.appendChild(li);
+    });
+    section.append(ul);
+  }
+
+  function ClearContent(main: HTMLElement) {
+    main.innerHTML = "";
+    contentArray.set([]);
+  }
+
+  function RenderWelcomeComponent(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute("class", "py-4");
+
+    const h1 = document.createElement("h1");
+    h1.setAttribute("class", "text-5xl font-pixelifysans");
+    h1.textContent = "Welcome to the terminal experience";
+
+    const span = document.createElement("span");
+    span.setAttribute("class", "text-lg text-gray-400");
+    span.innerHTML = `Type <span class="text-secondaryText">'help'</span> to list all the avaliable commands.`;
+
+    section.append(h1, span);
+    main.append(section);
+  }
+
+  function RenderInvalid(main: HTMLElement, command: string) {
+    const span = document.createElement("span");
+    span.setAttribute("class", "text-gray-500 block");
+    if (command==='empty') {
+        span.innerHTML = `Command cannot be empty, type <span class="text-secondaryText">'help'</span> to see all commands.`;
+    }
+    else{
+        span.innerHTML = `Your Command <span class="text-red-500">'${command}'</span> is not found, type <span class="text-secondaryText">'help'</span> to see all commands.`;
+    }
+    main.append(span);
+  }
 </script>
