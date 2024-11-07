@@ -1,3 +1,20 @@
+---
+const aboutme = await Astro.glob("../files/aboutme.md");
+const experience = await Astro.glob("../files/experience.md");
+const portfolio = await Astro.glob("../files/portfolio.md");
+const contactme = await Astro.glob("../files/contactme.md");
+
+const aboutMeHtml = aboutme.map((file) => file.compiledContent());
+const experienceHtml = experience.map((file) => file.compiledContent());
+const portfolioHtml = portfolio.map((file) => file.compiledContent());
+const contactMeHtml = contactme.map((file) => file.compiledContent());
+---
+
+<data id="about-file-output" data-html={aboutMeHtml}></data>
+<data id="experience-file-output" data-html={experienceHtml}></data>
+<data id="contact-file-output" data-html={contactMeHtml}></data>
+<data id="portfolio-file-output" data-html={portfolioHtml}></data>
+
 <section id="main"></section>
 
 <script>
@@ -22,6 +39,18 @@
               break;
             case "ls":
               ListFile(main);
+              break;
+            case "cat aboutme":
+              CatAboutMe(main);
+              break;
+            case "cat experience":
+              CatExperience(main);
+              break;
+            case "cat contactme":
+              CatContactMe(main);
+              break;
+            case "cat portfolio":
+              CatPotfolio(main);
               break;
             default:
               RenderInvalid(main, content);
@@ -101,10 +130,10 @@
 
   function ListFile(main: HTMLElement) {
     const wrapper = document.createElement("section");
-    wrapper.setAttribute("class", "flex flex-col gap-2 py-2");
+    wrapper.setAttribute("class", "flex flex-col gap-1 py-2");
 
     const section = document.createElement("section");
-    section.setAttribute("class", "flex flex-row gap-6");
+    section.setAttribute("class", "flex flex-row gap-4");
 
     if (AvailableFilesToList && AvailableFilesToList.length > 0) {
       AvailableFilesToList.forEach((file) => {
@@ -128,5 +157,49 @@
       wrapper.append(section);
     }
     main.append(wrapper);
+  }
+
+  async function CatAboutMe(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute("class", "py-4");
+
+    const htmlDataNode = document.getElementById("about-file-output")!;
+    const data = htmlDataNode.getAttribute("data-html");
+    section.innerHTML = data || "";
+
+    main.append(section);
+  }
+
+  async function CatExperience(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute("class", "py-4");
+    
+    const htmlDataNode = document.getElementById("experience-file-output")!;
+    const data = htmlDataNode.getAttribute("data-html");
+    section.innerHTML = data || "";
+
+    main.append(section);
+  }
+
+  async function CatContactMe(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute("class", "py-4");
+
+    const htmlDataNode = document.getElementById("contact-file-output")!;
+    const data = htmlDataNode.getAttribute("data-html");
+    section.innerHTML = data || "";
+
+    main.append(section);
+  }
+
+  async function CatPotfolio(main: HTMLElement) {
+    const section = document.createElement("section");
+    section.setAttribute("class", "py-4");
+
+    const htmlDataNode = document.getElementById("portfolio-file-output")!;
+    const data = htmlDataNode.getAttribute("data-html");
+    section.innerHTML = data || "";
+
+    main.append(section);
   }
 </script>

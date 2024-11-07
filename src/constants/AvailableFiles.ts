@@ -1,6 +1,6 @@
 export const Files=[
-    "AboutMe",
-    "Experience",
-    "Portfolio",
-    "ContactMe"
+    "aboutme",
+    "experience",
+    "portfolio",
+    "contactme"
 ]
