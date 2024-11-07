@@ -1,4 +1,5 @@
 ---
+import "../styles/mdFileStyles.css";
 const aboutme = await Astro.glob("../files/aboutme.md");
 const experience = await Astro.glob("../files/experience.md");
 const portfolio = await Astro.glob("../files/portfolio.md");
@@ -106,7 +107,7 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
     section.setAttribute("class", "py-4");
 
     const h1 = document.createElement("h1");
-    h1.setAttribute("class", "text-5xl font-pixelifysans");
+    h1.setAttribute("class", "text-5xl font-pixelifysans text-white");
     h1.textContent = "Welcome to the terminal experience";
 
     const span = document.createElement("span");
@@ -139,6 +140,7 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
       AvailableFilesToList.forEach((file) => {
         const span = document.createElement("span");
         span.textContent = file;
+        span.setAttribute('class','text-red-500');
         section.append(span);
       });
     } else {
@@ -152,7 +154,7 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
     helperText.innerHTML = `Type <span class="text-secondaryText">'Cat Filename'</span> to view the file content`;
 
     if (AvailableFilesToList.length > 0) {
-      wrapper.append(section, helperText);
+      wrapper.append(helperText, section);
     } else {
       wrapper.append(section);
     }

@@ -1,0 +1,7 @@
+h1{
+    @apply text-xl text-secondaryText;
+}
+
+p{
+    @apply text-gray-200;
+}
