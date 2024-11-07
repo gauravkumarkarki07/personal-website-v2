@@ -15,15 +15,13 @@
     type="text"
     maxlength="20"
     minlength="2"
+    autofocus
   />
 </form>
 
 <script>
   import { contentArray } from "../stores/globalStore.ts";
 
-  const availableCommands = ["help", "ls", "cat", "exit", "clear"];
-
-  const form = document.getElementById("commandForm");
   const input = document.querySelector("input");
 
   input?.addEventListener("keydown", (event) => {

@@ -15,8 +15,4 @@ export const commandList = [
       commandName: "clear",
       description: "clears the screen",
     },
-    {
-      commandName: "exit",
-      description: "exit the terminal",
-    },
   ];

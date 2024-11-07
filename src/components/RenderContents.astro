@@ -140,7 +140,7 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
       AvailableFilesToList.forEach((file) => {
         const span = document.createElement("span");
         span.textContent = file;
-        span.setAttribute('class','text-red-500');
+        span.setAttribute("class", "text-white");
         section.append(span);
       });
     } else {
@@ -175,7 +175,7 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
   async function CatExperience(main: HTMLElement) {
     const section = document.createElement("section");
     section.setAttribute("class", "py-4");
-    
+
     const htmlDataNode = document.getElementById("experience-file-output")!;
     const data = htmlDataNode.getAttribute("data-html");
     section.innerHTML = data || "";
