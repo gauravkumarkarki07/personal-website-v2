@@ -33,27 +33,35 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
         command.forEach((content) => {
           switch (content) {
             case "help":
+              RenderHistoryCommandLine(main, content);
               RenderHelpCommandList(main);
               break;
             case "clear":
+              RenderHistoryCommandLine(main, content);
               ClearContent(main);
               break;
             case "ls":
+              RenderHistoryCommandLine(main, content);
               ListFile(main);
               break;
             case "cat aboutme":
+              RenderHistoryCommandLine(main, content);
               CatAboutMe(main);
               break;
             case "cat experience":
+              RenderHistoryCommandLine(main, content);
               CatExperience(main);
               break;
             case "cat contactme":
+              RenderHistoryCommandLine(main, content);
               CatContactMe(main);
               break;
             case "cat portfolio":
+              RenderHistoryCommandLine(main, content);
               CatPotfolio(main);
               break;
             default:
+              RenderHistoryCommandLine(main, content);
               RenderInvalid(main, content);
           }
         });
@@ -203,5 +211,13 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
     section.innerHTML = data || "";
 
     main.append(section);
+  }
+
+  function RenderHistoryCommandLine(main: HTMLElement, command: string) {
+    const span = document.createElement("span");
+    span.setAttribute("class", "text-primaryText flex flex-row gap-0");
+    span.innerHTML = `guest@guest: <span class="text-secondaryText">~</span><span class="text-white">$ ${command}</span>`;
+
+    main.append(span);
   }
 </script>
