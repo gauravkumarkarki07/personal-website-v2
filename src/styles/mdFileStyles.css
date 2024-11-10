@@ -13,3 +13,7 @@ code{
 blockquote{
     @apply px-4 py-2 my-2 border-l-2 border-gray-50 text-gray-200;
 }
+
+a{
+    @apply text-linkColor hover:underline;
+}

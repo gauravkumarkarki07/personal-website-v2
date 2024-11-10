@@ -9,6 +9,7 @@ export default {
         secondaryText:'#1e90ff',
         accentText:'',
         primaryborderColor:'#00ff00',
+        linkColor:'#1E90FF'
       },
       fontFamily:{
         firacode:['Fira Code','sans-serif'],

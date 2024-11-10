@@ -2,19 +2,16 @@
 import "../styles/mdFileStyles.css";
 const aboutme = await Astro.glob("../files/aboutme.md");
 const experience = await Astro.glob("../files/experience.md");
-const portfolio = await Astro.glob("../files/portfolio.md");
 const contactme = await Astro.glob("../files/contactme.md");
 
 const aboutMeHtml = aboutme.map((file) => file.compiledContent());
 const experienceHtml = experience.map((file) => file.compiledContent());
-const portfolioHtml = portfolio.map((file) => file.compiledContent());
 const contactMeHtml = contactme.map((file) => file.compiledContent());
 ---
 
 <data id="about-file-output" data-html={aboutMeHtml}></data>
 <data id="experience-file-output" data-html={experienceHtml}></data>
 <data id="contact-file-output" data-html={contactMeHtml}></data>
-<data id="portfolio-file-output" data-html={portfolioHtml}></data>
 
 <section id="main"></section>
 
@@ -55,10 +52,6 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
             case "cat contactme":
               RenderHistoryCommandLine(main, content);
               CatContactMe(main);
-              break;
-            case "cat portfolio":
-              RenderHistoryCommandLine(main, content);
-              CatPotfolio(main);
               break;
             default:
               RenderHistoryCommandLine(main, content);
@@ -196,17 +189,6 @@ const contactMeHtml = contactme.map((file) => file.compiledContent());
     section.setAttribute("class", "py-4");
 
     const htmlDataNode = document.getElementById("contact-file-output")!;
-    const data = htmlDataNode.getAttribute("data-html");
-    section.innerHTML = data || "";
-
-    main.append(section);
-  }
-
-  function CatPotfolio(main: HTMLElement) {
-    const section = document.createElement("section");
-    section.setAttribute("class", "py-4");
-
-    const htmlDataNode = document.getElementById("portfolio-file-output")!;
     const data = htmlDataNode.getAttribute("data-html");
     section.innerHTML = data || "";
 
